@@ -328,8 +328,82 @@ jobs:
               https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/video/packages.adb
               EOF
            fi
-          
 
+       # 追加额外 APK 源（保留自动生成的源）
+#       if [[ "${WRT_CONFIG,,}" == *"ipq60"* ]]; then
+#         mkdir -p ./package/base-files/files/etc/uci-defaults/
+#         cat > ./package/base-files/files/etc/uci-defaults/99-add-extra-repos << 'SCRIPT_EOF'
+
+   # 追加额外软件源到 distfeeds.list
+#   cat >> /etc/apk/repositories.d/distfeeds.list << 'REPOS_EOF'
+
+   # 额外软件源 - 北京大学镜像
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/targets/qualcommax/ipq60xx/packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/base/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/luci/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/nss_packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/routing/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/sqm_scripts_nss/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/telephony/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/video/packages.adb
+#   REPOS_EOF
+
+   # 删除自身脚本，避免重复执行
+#  rm -f /etc/uci-defaults/99-add-extra-repos
+#   SCRIPT_EOF
+#       fi
+
+
+#原生源追加ipk和apk两种源，自动选择
+
+       # 追加额外软件源（支持 APK 和 OPKG 两种模式）
+ #      if [[ "${WRT_CONFIG,,}" == *"ipq60"* ]]; then
+ #        mkdir -p ./package/base-files/files/etc/uci-defaults/
+ #        cat > ./package/base-files/files/etc/uci-defaults/99-add-extra-repos << 'SCRIPT_EOF'
+ 
+   # 检测包管理器模式
+#   if [ -f "/etc/apk/repositories.d/distfeeds.list" ]; then
+     # APK 模式
+#     cat >> /etc/apk/repositories.d/distfeeds.list << 'REPOS_EOF'
+
+   # 额外软件源 - 北京大学镜像 (APK)
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/targets/qualcommax/ipq60xx/packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/base/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/luci/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/nss_packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/packages/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/routing/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/sqm_scripts_nss/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/telephony/packages.adb
+#   https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/video/packages.adb
+#   REPOS_EOF
+
+#  elif [ -f "/etc/opkg/distfeeds.conf" ]; then
+     # OPKG 模式
+#     cat >> /etc/opkg/distfeeds.conf << 'REPOS_EOF'
+
+   # 额外软件源 - 北京大学镜像 (OPKG)
+#   src/gz immortalwrt_core_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/targets/qualcommax/ipq60xx/packages
+#   src/gz immortalwrt_base_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/base
+#   src/gz immortalwrt_luci_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/luci
+#   src/gz immortalwrt_nss_packages_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/nss_packages
+#   src/gz immortalwrt_packages_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/packages
+#   src/gz immortalwrt_routing_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/routing
+#   src/gz immortalwrt_sqm_scripts_nss_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/sqm_scripts_nss
+#   src/gz immortalwrt_telephony_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/telephony
+#   src/gz immortalwrt_video_pku https://mirrors.pku.edu.cn/immortalwrt/snapshots/packages/aarch64_cortex-a53/video
+#   REPOS_EOF
+#   fi
+
+   # 删除自身脚本，避免重复执行
+#   rm -f /etc/uci-defaults/99-add-extra-repos
+#   SCRIPT_EOF
+#       fi
+
+
+      
+      
       # 【新增】参考 test3-main：编译前磁盘空间检查
       - name: Check Disk Space Before Compilation(编译前磁盘空间检查)
         if: env.WRT_TEST != 'true'
