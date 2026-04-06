@@ -296,7 +296,7 @@ jobs:
           git clone https://github.com/linkease/nas-packages-luci.git /tmp/quickstart-temp
 
           # 移动实际的插件目录到目标位置
-          mv /tmp/quickstart-temp/luci-app-quickstart package/luci-app-quickstart
+          mv /tmp/quickstart-temp/luci/luci-app-quickstart package/luci-app-quickstart
           
           # 清理临时目录
           rm -rf /tmp/quickstart-temp
