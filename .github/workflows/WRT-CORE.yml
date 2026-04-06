@@ -288,6 +288,20 @@ jobs:
           rm -rf /tmp/passwall2-temp
           echo "passwall2 installation download!"
 
+          
+      - name: 下载luci-app-quickstart安装包
+        run: |
+          cd ./wrt/
+          # 克隆整个仓库到临时目录
+          git clone https://github.com/linkease/nas-packages-luci.git /tmp/quickstart-temp
+
+          # 移动实际的插件目录到目标位置
+          mv /tmp/quickstart-temp/luci-app-quickstart package/luci-app-quickstart
+          
+          # 清理临时目录
+          rm -rf /tmp/quickstart-temp
+          echo "quickstart installation download!"
+          
       - name: 下载lucky安装包
         run: |
           cd ./wrt/
