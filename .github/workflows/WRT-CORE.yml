@@ -302,6 +302,13 @@ jobs:
           rm -rf /tmp/quickstart-temp
           echo "quickstart installation download!"
           
+      - name: 移除luci-app-store依赖
+        run: |
+          cd ./wrt/
+          # 移除 Makefile 中的 luci-app-store 依赖
+          sed -i 's/+luci-app-store//' ./package/luci-app-quickstart/Makefile
+          echo "已移除 luci-app-store 依赖!"
+          
       - name: 下载lucky安装包
         run: |
           cd ./wrt/
