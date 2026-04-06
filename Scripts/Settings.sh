@@ -119,8 +119,10 @@ echo "CONFIG_PACKAGE_luci-theme-kucat=n" >> ./.config
 
 # 可以让FinalShell查看文件列表并且ssh连上不会自动断开
 echo "CONFIG_PACKAGE_openssh-sftp-server=y" >> ./.config
-# istoreOS的快速设置界面
+# istoreOS的快速设置界面前端
 echo "CONFIG_PACKAGE_luci-app-quickstart=y" >> ./.config
+# istoreOS的快速设置界面后端
+echo "CONFIG_PACKAGE_quickstart=y" >> ./.config
 # Bandix 网络流量监控后端
 echo "CONFIG_PACKAGE_bandix=y" >> ./.config
 #Bandix 网络流量监控前端
